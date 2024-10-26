@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Order Confirmation</title>
+</head>
+<body>
+    <h1>Delete Order Confirmation</h1>
+    <p>Are you sure you want to delete this order?</p>
+    <form method="POST">
+        <button type="submit" name="confirm_delete">Yes, Delete</button>
+        <a href="{{ url_for('view_all_orders') }}">Cancel</a>
+    </form>
+</body>
+</html>

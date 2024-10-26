@@ -1,0 +1,40 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    table-layout: auto;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+button {
+    background-color: #4CAF50;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}

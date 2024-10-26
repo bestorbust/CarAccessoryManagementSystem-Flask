@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+    
+</head>
+<body>
+    <header class="fixed-top oval-header">
+        <nav>
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                    <span class="ml-2">CarAcc:Your Accessory Hub</span>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('body') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('select_products') }}">Place Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('orders_conf') }}">View all Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('user_order') }}">MY Order</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main-content container">
+        <div class="container">
+    
+    <h1>Select Products</h1>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <form action="/select_products" method="post">
+        <label for="customer_email">Customer Email:</label>
+        <input type="email" id="customer_email" name="customer_email" required><br>
+        <h2>Available Products</h2>
+        <ul>
+            {% for product in products %}
+                <li>
+                    Name:{{ product[1] }}    -    Model:{{ product[2] }}    -    Quantity: {{ product[4] }}    -    Price:${{product[3]}}    -     Quantity needed
+                    <input type="number" name="quantity_{{ product[0] }}" min="0" max="{{ product[3] }}" required>
+                    <input type="checkbox" name="product_ids" value="{{ product[0] }}">
+                    <input type="date" name="order_date" required>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+</main>
+{% include 'footer.html' %}
+
+</body>
+</html>

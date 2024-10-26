@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Records</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <header class="fixed-top oval-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                <span class="ml-2">CarAcc:Your Accessory Hub</span>
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('body') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#abt">Customer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#service">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Place Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_login') }}">View all Order</a></li>
+                </ul>
+            </nav>
+            <a href="{{url_for('register')}}" class="btn btn-primary">Get Started</a>
+        </div>
+    </header>
+    
+    <main class="main-content container">
+        <div class="container">
+            <h1>Customer Records</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ customer[1] }}</td>
+                            <td>{{ customer[2] }}</td>
+                            <td>
+                                <a href="{{ url_for('edit', id=customer[0]) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ url_for('delete', id=customer[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2>Add New Customer</h2>
+            <form action="/add" method="post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">Add Customer</button>
+            </form>
+            <div class="container">
+                <a href="{{ url_for('products') }}"><button class="btn btn-info">View Products</button></a>
+                <a href="{{ url_for('select_products') }}"><button class="btn btn-info">Order</button></a>
+                <a href="{{ url_for('orders_conf') }}"><button class="btn btn-info">ALL Order</button></a>
+                <a href="{{ url_for('view_all_orders') }}"><button class="btn btn-info">ALL Order</button></a>
+            </div>
+        </div>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Payment</title>
+</head>
+<body>
+    <h1>Process Payment</h1>
+
+    <h2>Customer Details:</h2>
+    <p>Name: {{ customer[1] }}</p>
+    <p>Email: {{ customer[2] }}</p>
+    <!-- Add more customer details here if needed -->
+
+    <form method="post">
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" required><br>
+
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" required><br>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required><br>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

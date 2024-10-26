@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Cart</title>
+</head>
+<body>
+    <h1>User Cart</h1>
+    <!-- Display user's cart items with options to edit or delete -->
+    <form method="POST" action="/edit_cart_item/{{ cart_item.id }}">
+        <input type="text" name="new_quantity" value="{{ cart_item.quantity }}">
+        <button type="submit">Update Quantity</button>
+    </form>
+    <form method="POST" action="/delete_cart_item/{{ cart_item.id }}">
+        <button type="submit">Delete Item</button>
+    </form>
+</body>
+</html>

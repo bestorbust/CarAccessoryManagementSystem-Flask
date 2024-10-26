@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <header class="fixed-top oval-header">
+        <nav>
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                    <span class="ml-2">CarAcc:Your Accessory Hub</span>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('body') }}">Home</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user_products') }}">Products</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('user_search_products') }}">Search</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('select_products') }}">Place Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('uorder_confirmation',customer_id= customer[0]) }}">MY Order</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main-content container">
+        <div class="container">
+            <h1>Products</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Name</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product[0] }}</td>
+                            <td>{{ product[1] }}</td>
+                            <td>{{ product[2] }}</td>
+                            <td>${{ product[3] }}</td>
+                            <td>{{ product[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

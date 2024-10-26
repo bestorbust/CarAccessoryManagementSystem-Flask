@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Orders</title>
+</head>
+<body>
+    <h1>All Orders</h1>
+    {% for customer_id, customer in orders_by_customer.items() %}
+        <h2>{{ customer.customer_name }}</h2>
+        <p>Email: {{ customer.customer_email }}</p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>DATE</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Subtotal</th>
+                    <th>Update Quantity</th>
+                    <th>Update Status</th>
+                    <th>Delete Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in customer.orders %}
+                    <tr>
+                        <td>{{ order.product_name }}</td>
+                        <td>{{ order.order_date }}</td>
+                        <td>{{ order.product_price }}</td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                <input type="number" name="new_quantity" value="{{ order.quantity }}">
+                                <button type="submit" name="update_quantity">Update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                <select name="new_status">
+                                    <option value="Pending" {% if order.status == 'Pending' %} selected {% endif %}>Pending</option>
+                                    <option value="Delivered" {% if order.status == 'Delivered' %} selected {% endif %}>Delivered</option>
+                                </select>
+                                <button type="submit" name="update_status">Update</button>
+                            </form>
+                        </td>
+                        <td>{{ order.subtotal }}</td>
+                        <td>
+                            <form method="POST">
+                                <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                <button type="submit" name="delete_order">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Total Price: {{ customer.total_price }}</p>
+    {% endfor %}
+</body>
+</html>

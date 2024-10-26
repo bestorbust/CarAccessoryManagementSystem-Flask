@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Orders</title>
+</head>
+<body>
+    <h1>User Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+                <td>{{ order[4] }}</td>
+                <td>
+                    <form method="POST" action="/edit_user_order/{{ order[0] }}">
+                        <input type="text" name="new_quantity" placeholder="New Quantity" required>
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form method="POST" action="/delete_user_order/{{ order[0] }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

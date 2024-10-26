@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header class="fixed-top oval-header">
+        <nav>
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                    <span class="ml-2">CarAcc:Your Accessory Hub</span>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('body') }}">Home</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user_products') }}">Products</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('user_search_products') }}">Search</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('select_products') }}">Place Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('orders_user') }}">MY Order</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('select_products') }}">Place Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('orders_conf') }}">View all Order</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="main-content container">
+        <div class="container">
+    
+    <h1>Order Confirmation</h1>
+
+    <h2>Customer Details:</h2>
+    <p>Name: {{ customer[1] }}</p>
+    <p>Email: {{ customer[2] }}</p>
+
+    <h2>Selected Products:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order[1] }}</td>
+                <td>${{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+                <td>${{ order[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Total Bill: ${{ total }}</h2>
+
+    
+    <button onclick="window.print()">Print Bill</button>
+
+    <form action="{{ url_for('process_payment', customer_id=customer[0]) }}" method="post">
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</div>
+</main>
+{% include 'footer.html' %}
+
+</html>

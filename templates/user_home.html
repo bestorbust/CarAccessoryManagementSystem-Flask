@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.name }}!</h1>
+    <h2>Available Products</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong> - {{ product.price }} - {{ product.quantity }}
+            <form method="POST" action="/add_to_cart">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="number" name="quantity" value="1" min="1" required>
+                <button type="submit">Add to Cart</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>My Orders</h2>
+    <ul>
+        {% for order in orders %}
+        <li>{{ order.product_name }} - {{ order.quantity }} - {{ order.order_date }}</li>
+        {% endfor %}
+    </ul>
+    <h2>My Cart</h2>
+    <ul>
+        {% for cart_item in cart %}
+        <li>{{ cart_item.product_name }} - Quantity: {{ cart_item.quantity }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/user_profile">Edit Profile</a>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<!-- Main Content -->
+<main class="main-content container">
+    <section id="top" class="top">
+        <h1>Revolutionize your ride with our top-notch auto parts. Drive like a pro!</h1>
+    </section>
+    <section id="abt" class="who-we-are-box text-center">
+        <h2>Who We Are</h2>
+        <p>Welcome to CarAcc:Your Accessory Hub, where car enthusiasts and auto parts aficionados unite to revolutionize the way you manage car supplies.</p>
+        <p>Our platform caters to both admins and customers, offering a seamless experience for all your car part needs.</p>
+        <p>Join us in the fast lane of automotive excellence and take control of your car parts like never before.</p>
+    </section>
+    
+
+    <section id="service" class="features-box mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <img src="{{ url_for('static', filename='tires.png') }}" alt="Admin Control">
+                    </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <h3>Admin Control</h3>
+                    <p>Empower admins to add customers, products, and orders with ease, ensuring a smooth operation behind the scenes.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <h3>Customer Experience</h3>
+                    <p>Customers can personalize their profiles, order auto parts, track purchases, and make payments hassle-free.</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <h3>Order Tracking</h3>
+                    <p>Track every order from start to finish, ensuring transparency and customer satisfaction.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <h3>Secure Payments</h3>
+                    <p>Our platform ensures secure and seamless transactions for your peace of mind.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature">
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is available around the clock to assist you with any queries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h2>Frequently Asked Questions</h2>
+    <section id="faq-section" class="faq-box mt-4 text-center">
+        
+        <div class="faq-item">
+            <h3>How do I create an account?</h3>
+            <p>To create an account, simply click on the 'Get Started' button and follow the easy registration process.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I track my orders?</h3>
+            <p>Yes, you can track all your orders in real-time to stay updated on the status of your car parts delivery.</p>
+        </div>
+    </section>
+
+    
+</main>
+
+{% include 'footer.html' %}
+</body>
+</html>

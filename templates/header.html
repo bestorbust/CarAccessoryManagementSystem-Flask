@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Header -->
+<header class="fixed-top oval-header">
+    
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+            <span class="ml-2">CarAcc:Your Accessory Hub</span>
+        </div>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('body') }}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#abt">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#service">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_login') }}">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('user_login') }}">Customer</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq-section">FAQ</a></li>
+            </ul>
+        </nav>
+        <a href="{{url_for('register')}}" class="btn btn-primary">Get Started</a>
+    </div>
+</header>
+</body>
+</html>

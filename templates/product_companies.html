@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Companies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .container h1, .container h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .list li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .list li:hover {
+            background-color: #f0f0f0;
+        }
+        .form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .form button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+            margin-top: 10px;
+        }
+        .form button:hover {
+            background-color: #45a049;
+        }
+        .action-buttons {
+            text-align: center;
+        }
+        .action-buttons button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Companies</h1>
+        <ul class="list">
+            {% for company in companies %}
+                <li>
+                    {{ company[1] }} - {{ company[2] }}
+                    <div class="action-buttons">
+                        <a href="{{ url_for('edit_product_company', id=company[0]) }}"><button>Edit</button></a>
+                        <a href="{{ url_for('delete_product_company_route', id=company[0]) }}"><button>Delete</button></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>Add New Product Company</h2>
+        <form class="form" action="/add_product_company" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required><br>
+            <button type="submit">Add Product Company</button>
+        </form>
+        <div class="action-buttons">
+            <a href="{{ url_for('index') }}"><button>View Customers</button></a>
+            <a href="{{ url_for('products') }}"><button>View Products</button></a>
+        </div>
+    </div>
+</body>
+</html>
