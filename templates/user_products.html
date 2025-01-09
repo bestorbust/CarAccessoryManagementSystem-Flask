@@ -1,0 +1,45 @@
+<!-- user_products.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <style>
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="products-container">
+        <a href="{{ url_for('user_dashboard') }}">Back to Dashboard</a>
+        
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <h3>{{ product[1] }}</h3>
+                <p>Model: {{ product[2] }}</p>
+                <p>Price: USD {{ "%.2f"|format(product[3]) }}</p>
+                <p>Available: {{ product[4] }}</p>
+                
+                <form action="{{ url_for('add_to_cart', product_id=product[0]) }}" method="POST">
+                    <input type="number" name="quantity" min="1" max="{{ product[4] }}" value="1">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

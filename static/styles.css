@@ -1,5 +1,5 @@
 body {
-    background-color: #ffebef;
+    background-color: #cfcfcf;
     font-family: Arial, sans-serif;
 }
 
@@ -41,8 +41,9 @@ p{
 font-size: 20px;
 }
 .top h1{
-    color: red;
+    color: rgb(18, 18, 18);
     font-size: 70px;
+    font-weight: bolder;
 }
 .who-we-are-box h2 {
     font-size: 60px;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,6 @@
     <h2>Customer Details:</h2>
     <p>Name: {{ customer[1] }}</p>
     <p>Email: {{ customer[2] }}</p>
-    <!-- Add more customer details here if needed -->
 
     <form method="post">
         <label for="card_number">Card Number:</label>
@@ -25,5 +24,88 @@
 
         <button type="submit">Pay Now</button>
     </form>
+</body>
+</html> -->
+<!-- payment.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .order-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .payment-form {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Payment</h2>
+        
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <p>Product: {{ order[1] }}</p>
+            <p>Quantity: {{ order[2] }}</p>
+            <p>Price per item: USD {{ "%.2f"|format(order[3]) }}</p>
+            <p>Total Amount: USD {{ "%.2f"|format(order[4]) }}</p>
+        </div>
+
+        <form method="POST" class="payment-form">
+            <div class="form-group">
+                <label>Payment Method:</label>
+                <select name="payment_method" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
+                    <option value="upi">UPI</option>
+                </select>
+            </div>
+            
+            <div id="card_details" class="form-group">
+                <label>Card Number:</label>
+                <input type="text" name="card_number" pattern="\d{16}" placeholder="16-digit card number">
+                
+                <label>Expiry Date:</label>
+                <input type="text" name="expiry" placeholder="MM/YY">
+                
+                <label>CVV:</label>
+                <input type="text" name="cvv" pattern="\d{3}" placeholder="3-digit CVV">
+            </div>
+            
+            <div id="upi_details" class="form-group" style="display:none;">
+                <label>UPI ID:</label>
+                <input type="text" name="upi_id" placeholder="username@upi">
+            </div>
+            
+            <button type="submit" class="btn">Make Payment</button>
+        </form>
+    </div>
+
+    <script>
+        // Toggle payment method fields
+        document.querySelector('select[name="payment_method"]').addEventListener('change', function() {
+            const cardDetails = document.getElementById('card_details');
+            const upiDetails = document.getElementById('upi_details');
+            
+            if (this.value === 'upi') {
+                cardDetails.style.display = 'none';
+                upiDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'block';
+                upiDetails.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

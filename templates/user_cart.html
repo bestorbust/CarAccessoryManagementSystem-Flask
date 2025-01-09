@@ -1,0 +1,71 @@
+<!-- user_cart.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cart-table th, .cart-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <a href="{{ url_for('user_dashboard') }}">Back to Dashboard</a>
+        
+        {% if cart_items %}
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item[1] }}</td>
+                    <td>USD {{ "%.2f"|format(item[2]) }}</td>
+                    <td>
+                        <form action="{{ url_for('update_cart', product_id=item[0]) }}" method="POST">
+                            <input type="number" name="quantity" value="{{ item[3] }}" min="0">
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>USD {{ "%.2f"|format(item[4]) }}</td>
+                    <td>
+                        <form action="{{ url_for('update_cart', product_id=item[0]) }}" method="POST">
+                            <input type="hidden" name="quantity" value="0">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div style="text-align: right; margin-top: 20px;">
+            <p>Total: USD {{ "%.2f"|format(total) }}</p>
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <button type="submit">Proceed to Checkout</button>
+            </form>
+        </div>
+        {% else %}
+        <p>Your cart is empty</p>
+        {% endif %}
+    </div>
+</body>
+</html>

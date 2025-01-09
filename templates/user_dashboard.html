@@ -1,0 +1,262 @@
+<!-- user_dashboard.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .nav-menu {
+            background: #333;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .orders-section {
+            margin-top: 20px;
+        }
+        .order-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="nav-menu">
+            <a href="{{ url_for('user_products') }}">Browse Products</a>
+            <a href="{{ url_for('view_cart') }}">Cart</a>
+            <a href="{{ url_for('user_logout') }}">Logout</a>
+        </div>
+
+        <h2>Welcome, {{ customer[1] }}!</h2>
+
+        <div class="orders-section">
+            <h3>Your Orders</h3>
+            {% for order in orders %}
+            <div class="order-card">
+                <p>Order ID: {{ order[0] }}</p>
+                <p>Product: {{ order[1] }} ({{ order[2] }})</p>
+                <p>Quantity: {{ order[4] }}</p>
+                <p>Total: USD {{ "%.2f"|format(order[5]) }}</p>
+                <p>Date: {{ order[6] }}</p>
+                <p>Status: {{ order[7] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tech Accessories - User Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .timestamp {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+
+        .nav-menu {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-menu a {
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .orders-section, .summary-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .order-card {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .status-pending {
+            color: #f39c12;
+        }
+
+        .status-paid {
+            color: #27ae60;
+        }
+
+        .summary-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="user-info">
+                <div class="user-avatar">
+                    {{ customer[1][0].upper() }}
+                </div>
+                <div>
+                    <h2>Welcome, {{ customer[1] }}!</h2>
+                    <span class="timestamp">Last login: 2025-01-09 15:06:58</span>
+                </div>
+            </div>
+            <form action="{{ url_for('user_logout') }}" method="get">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+
+        <div class="nav-menu">
+            <a href="{{ url_for('user_products') }}">Browse Products</a>
+            <a href="{{ url_for('view_cart') }}">Shopping Cart</a>
+            <a href="{{ url_for('user_profile') }}">Update Profile</a>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="orders-section">
+                <h3 class="section-title">Recent Orders</h3>
+                {% if orders %}
+                    {% for order in orders %}
+                    <div class="order-card">
+                        <h4>Order #{{ order[0] }}</h4>
+                        <p>Product: {{ order[1] }} ({{ order[2] }})</p>
+                        <p>Quantity: {{ order[4] }}</p>
+                        <p>Total: USD {{ "%.2f"|format(order[5]) }}</p>
+                        <p>Date: {{ order[6] }}</p>
+                        <p class="status-{{ order[7] }}">Status: {{ order[7].title() }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No orders yet. Start shopping!</p>
+                {% endif %}
+            </div>
+
+            <div class="summary-section">
+                <h3 class="section-title">Account Summary</h3>
+                <div class="summary-box">
+                    <p><strong>Email:</strong> {{ customer[2] }}</p>
+                    <p><strong>Address:</strong> {{ customer[3] or 'Not set' }}</p>
+                </div>
+
+                <div class="summary-box">
+                    <h4>Quick Stats</h4>
+                    <p>Total Orders: {{ orders|length }}</p>
+                    <p>Pending Orders: {{ orders|selectattr('7', 'equalto', 'pending')|list|length }}</p>
+                    <p>Completed Orders: {{ orders|selectattr('7', 'equalto', 'paid')|list|length }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
